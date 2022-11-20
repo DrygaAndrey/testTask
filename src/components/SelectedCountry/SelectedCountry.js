@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./SelectedCountry.sass";
 import axios from "axios";
 
-function SelectedCountry({ country, setSelectedCountry }) {
+function SelectedCountry({ country }) {
   const [selectedCountryData, setSelectedCountryData] = useState([]);
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -35,13 +35,6 @@ function SelectedCountry({ country, setSelectedCountry }) {
               </div>
             );
           })}
-          <button
-            onClick={() => {
-              setSelectedCountry({});
-            }}
-          >
-            Close
-          </button>
         </>
       )}
     </div>

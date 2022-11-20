@@ -7,6 +7,7 @@ import "./App.css";
 const App = () => {
   const [data, setData] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [sortType, setSortType] = useState("asc");
   const [selectedCountry, setSelectedCountry] = useState({});
 
   useEffect(() => {
@@ -23,6 +24,16 @@ const App = () => {
     setSelectedCountry(country);
     // #3 update this function to handle county click and fetch holidays
   };
+  function Sort() {
+    if (sortType === "desc") {
+      setSortType("asc");
+      setData(data.reverse());
+      
+    } else {
+      setSortType("desc");
+      setData(data.reverse());
+    }
+  }
   return (
     <div className="container">
       <h1>React Test</h1>
@@ -38,21 +49,27 @@ const App = () => {
                 setSearchText(e.target.value);
               }}
             />
-            <button>Sort</button>
-            <button>Reset</button>
+            <button onClick={Sort}>
+              {sortType === "desc" ? "asc" : "desc"}
+            </button>
+            <button
+              onClick={() => {
+                setSelectedCountry({});
+              }}
+            >
+              Reset
+            </button>
           </section>
           <ListItems
             data={data}
             searchText={searchText}
             onCountryClick={onCountryClick}
+            sortType={sortType}
           />
         </div>
         <div className="info-area">
           {/* #3 display selectedCountryHolidays here */}
-          <SelectedCountry
-            country={selectedCountry}
-            setSelectedCountry={setSelectedCountry}
-          />
+          <SelectedCountry country={selectedCountry} />
         </div>
       </div>
     </div>
